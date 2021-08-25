@@ -1,18 +1,32 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <v-quagga :onDetected="logIt" :readerSize="readerSize" :readerTypes="['ean_reader']"></v-quagga>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Vue from 'vue'
+import VueQuagga from 'vue-quaggajs';
+
+// register component 'v-quagga'
+Vue.use(VueQuagga);
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  name: 'VueBarcodeTest',
+  data () {
+    return {
+      readerSize: {
+        width: 640,
+        height: 480
+      },
+      detecteds: []
+    }
+  },
+  methods: {
+    logIt (data) {
+      console.log('detected', data)
+    }
+
   }
 }
 </script>
